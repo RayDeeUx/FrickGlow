@@ -8,4 +8,4 @@ Made with much-appreciated help from:
 
 Disclaimers:
 \- Some features may not be available for macOS or Android.
-\- This does not affect overall game performace; the glows are simply invisible.
+\- This does not affect overall game performance; the glows are simply invisible.
