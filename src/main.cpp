@@ -9,10 +9,11 @@ using namespace geode::utils::string;
 
 const std::regex glowSprite(".*_\\d+_.*\\.png");
 const std::regex glowGameplay("(?:\\w+)?(?:[Bb](?:ump|oost)|[Rr]ing)_(?:\\d+_)?glow_001\\.png");
+const std::regex glowPlayer(".*(?:robot|spider|ship|player|ball|bird|ufo|dart|wave|swing).*");
 
 // hide gradients via GameObject (hooking, static_cast, m_fields by dank_meme, matcool, Firee) (string utils suggested by cgytrus)
 // WINDOWS ONLY
-#ifdef GEODE_IS_WINDOWS
+#if defined(GEODE_IS_WINDOWS)
 class $modify(MyGameObject, GameObject) {
     bool isGradient = false;
     static void onModify(auto & self)
@@ -53,7 +54,7 @@ class $modify(MyCCSprite, CCSprite) {
         if (!(Mod::get()->getSettingValue<bool>("enabled"))) return sprite;
 		if (Mod::get()->getSettingValue<bool>("hideGlowGameplayElements") && std::regex_match(frameName, glowGameplay))
 			static_cast<MyCCSprite*>(sprite)->m_fields->isGlowSprite = true;
-        if ((Mod::get()->getSettingValue<bool>("hideGlowFromBlocks")) && string::contains(frameName, "_glow_") && !(std::regex_match(frameName, glowGameplay)) && (std::regex_match(frameName, glowSprite) && !(string::contains(frameName, "robot") || string::contains(frameName, "ship") || string::contains(frameName, "spider") ||  string::contains(frameName, "player") || string::contains(frameName, "bird") || string::contains(frameName, "dart") || string::contains(frameName, "ufo") || string::contains(frameName, "ball") || string::contains(frameName, "swing"))))
+        if ((Mod::get()->getSettingValue<bool>("hideGlowFromBlocks")) && string::contains(frameName, "_glow_") && !(std::regex_match(frameName, glowGameplay)) && (std::regex_match(frameName, glowSprite) && !(std::regex_match(frameName, glowPlayer))))
 			static_cast<MyCCSprite*>(sprite)->m_fields->isGlowSprite = true;
         return sprite;
     }
@@ -65,18 +66,17 @@ class $modify(MyCCSprite, CCSprite) {
     }
 };
 
-// disable gradient trigger (idea by ItsLever)
+// disable gradient trigger (idea by ItsLever, optimization by PoweredByPie)
 // WINDOWS AND ANDROID
-#ifdef GEODE_IS_WINDOWS GEODE_IS_ANDROID
+#if defined(GEODE_IS_WINDOWS) || defined(GEODE_IS_ANDROID)
 class $modify(MyPlayLayer, PlayLayer) {
 	static void onModify(auto & self)
     {
         self.setHookPriority("PlayLayer::addObject", 1000);
     }
 	TodoReturn addObject(GameObject* p0) {
-		if (!(Mod::get()->getSettingValue<bool>("enabled"))) {PlayLayer::addObject(p0); return;}
-		if (!(Mod::get()->getSettingValue<bool>("disableGradientTriggers"))) {PlayLayer::addObject(p0); return;}
-		if (p0->m_objectID != 2903) PlayLayer::addObject(p0); // 2903 == gradient trigger
+        if (!Mod::get()->getSettingValue<bool>("enabled") || !Mod::get()->getSettingValue<bool>("disableGradientTriggers") || p0->m_objectID != 2903)
+            PlayLayer::addObject(p0);
 	}
 };
 #endif
