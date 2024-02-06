@@ -11,6 +11,8 @@ const std::regex glowSprite(".*_\\d+_.*\\.png");
 const std::regex glowGameplay("(?:\\w+)?(?:[Bb](?:ump|oost)|[Rr]ing)_(?:\\d+_)?glow_001\\.png");
 
 // hide gradients via GameObject (hooking, static_cast, m_fields by dank_meme, matcool, Firee) (string utils suggested by cgytrus)
+// WINDOWS ONLY
+#ifdef GEODE_IS_WINDOWS
 class $modify(MyGameObject, GameObject) {
     bool isGradient = false;
     static void onModify(auto & self)
@@ -36,6 +38,7 @@ class $modify(MyGameObject, GameObject) {
 			GameObject::setVisible(p0);
     }
 };
+#endif
 
 // hide glow via CCSprite (string utils suggested by cgytrus)
 class $modify(MyCCSprite, CCSprite) {
@@ -63,6 +66,8 @@ class $modify(MyCCSprite, CCSprite) {
 };
 
 // disable gradient trigger (idea by ItsLever)
+// WINDOWS AND ANDROID
+#ifdef GEODE_IS_WINDOWS GEODE_IS_ANDROID
 class $modify(MyPlayLayer, PlayLayer) {
 	static void onModify(auto & self)
     {
@@ -74,3 +79,4 @@ class $modify(MyPlayLayer, PlayLayer) {
 		if (p0->m_objectID != 2903) PlayLayer::addObject(p0); // 2903 == gradient trigger
 	}
 };
+#endif
