@@ -7,5 +7,5 @@ Made with much-appreciated help from:
 \- ItsLever (disabling Gradient trigger strategy)
 
 Disclaimers:
-\- Some features may not be available for macOS.
+\- Some features may not be available for macOS or Android.
 \- This does not affect overall game performace; the glows are simply invisible.
