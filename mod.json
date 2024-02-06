@@ -1,6 +1,11 @@
 {
 	"geode": "2.0.0-beta.15",
-	"gd": "2.204",
+	"gd": {
+            "mac": "2.200",
+            "ios": "2.205",
+            "android": "2.205",
+            "win": "2.204"
+        },
 	"version": "v1.0.0",
 	"id": "raydeeux.fuckglow",
 	"name": "FuckGlow",
