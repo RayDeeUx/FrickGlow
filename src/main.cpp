@@ -77,7 +77,7 @@ class $modify(MyPlayLayer, PlayLayer) {
 	TodoReturn addObject(GameObject* p0) {
         if (Mod::get()->getSettingValue<bool>("enabled") && Mod::get()->getSettingValue<bool>("disableGradientTriggers")) {
             bool dontSkip = true;
-            if (p0->m_objectID == 2903) dontSkip = false;
+            if (p0->m_objectID == 2903) dontSkip = false; // gradient trigger ID
             if (dontSkip) PlayLayer::addObject(p0);
         } else PlayLayer::addObject(p0);
 	}
