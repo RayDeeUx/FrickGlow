@@ -75,8 +75,9 @@ class $modify(MyPlayLayer, PlayLayer) {
         self.setHookPriority("PlayLayer::addObject", 1000);
     }
 	TodoReturn addObject(GameObject* p0) {
-        if (!Mod::get()->getSettingValue<bool>("enabled") || !Mod::get()->getSettingValue<bool>("disableGradientTriggers") || p0->m_objectID != 2903)
+        if (Mod::get()->getSettingValue<bool>("enabled") && Mod::get()->getSettingValue<bool>("disableGradientTriggers") && p0->m_objectID != 2903)
             PlayLayer::addObject(p0);
+        else PlayLayer::addObject(p0);
 	}
 };
 #endif
