@@ -10,6 +10,7 @@
 	"name": "FuckGlow",
 	"developer": "RayDeeUx",
 	"description": "Hides all glow-related objects (including glow from blocks).",
+	"repository": "https://github.com/RayDeeUx/FuckGlow",
 	"settings": {
 		"enabled": {
 			"name": "Enabled",
