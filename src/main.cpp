@@ -1,85 +1,31 @@
 #include <Geode/Geode.hpp>
-#include <Geode/modify/GameObject.hpp>
-#include <Geode/modify/CCSprite.hpp>
 #include <Geode/modify/PlayLayer.hpp>
-#include <regex>
+#include <list>
 
 using namespace geode::prelude;
-using namespace geode::utils::string;
 
-const std::regex glowSprite(".*_\\d+_.*\\.png");
-const std::regex glowGameplay("(?:\\w+)?(?:[Bb](?:ump|oost)|[Rr]ing)_(?:\\d+_)?glow_001\\.png");
-const std::regex glowPlayer(".*(?:robot|spider|ship|player|ball|bird|ufo|dart|wave|swing).*");
+std::list<int> iHateGradients = {503, 504, 505, 1008, 1009, 1010, 1011, 1012, 1013, 1269, 1270, 1271, 1272, 1273, 1274, 1291, 1292, 1293, 1758, 1759, 1760, 1761, 1762, 1763, 1886, 1887, 1888};
+std::list<int> gameplayElements = {10, 11, 12, 13, 35, 36, 45, 46, 47, 67, 84, 99, 101, 111, 140, 141, 200, 201, 202, 203, 286, 287, 660, 745, 746, 747, 748, 1022, 1330, 1331, 1332, 1333, 1334, 1594, 1704, 1751, 1933, 2063, 2064, 2902, 2926, 3004, 3005, 3027, };
 
-// hide gradients via GameObject (hooking, static_cast, m_fields by dank_meme, matcool, Firee) (string utils suggested by cgytrus)
-// WINDOWS ONLY
-#if defined(GEODE_IS_WINDOWS)
-class $modify(MyGameObject, GameObject) {
-    bool isGradient = false;
-    static void onModify(auto & self)
-    {
-        self.setHookPriority("GameObject::createWithFrame", 1000);
-        self.setHookPriority("GameObject::setVisible", 1000);
-    }
-    static GameObject* createWithFrame(char const* frameName) {
-        GameObject* gameObject = GameObject::createWithFrame(frameName);
-        if (!(Mod::get()->getSettingValue<bool>("enabled"))) return gameObject;
-		if (!(Mod::get()->getSettingValue<bool>("hideGlowDeco"))) return gameObject;
-        if (((strcmp(frameName, "emptyFrame.png") == 0) || (string::contains(frameName, "_gradient_"))))
-            static_cast<MyGameObject*>(gameObject)->m_fields->isGradient = true;
-		if (!(Mod::get()->getSettingValue<bool>("hideGlowDecoAdvanced"))) return gameObject;
-		if (strcmp(frameName, "blockOutline_14_001.png") == 0 || strcmp(frameName, "blockOutline_15_001.png") == 0)
-            static_cast<MyGameObject*>(gameObject)->m_fields->isGradient = true;
-        return gameObject;
-    }
-    void setVisible(bool p0) {
-        if (m_fields->isGradient)
-			GameObject::setVisible(false);
-		else
-			GameObject::setVisible(p0);
-    }
-};
-#endif
-
-// hide glow via CCSprite (string utils suggested by cgytrus)
-class $modify(MyCCSprite, CCSprite) {
-	bool isGlowSprite = false;
-    static void onModify(auto & self)
-    {
-        self.setHookPriority("CCSprite::createWithSpriteFrameName", 1000);
-        self.setHookPriority("CCSprite::setVisible", 1000);
-    }
-	static CCSprite* createWithSpriteFrameName(char const* frameName) {
-        CCSprite* sprite = CCSprite::createWithSpriteFrameName(frameName);
-        if (!(Mod::get()->getSettingValue<bool>("enabled"))) return sprite;
-		if (Mod::get()->getSettingValue<bool>("hideGlowGameplayElements") && std::regex_match(frameName, glowGameplay))
-			static_cast<MyCCSprite*>(sprite)->m_fields->isGlowSprite = true;
-        if ((Mod::get()->getSettingValue<bool>("hideGlowFromBlocks")) && string::contains(frameName, "_glow_") && !(std::regex_match(frameName, glowGameplay)) && (std::regex_match(frameName, glowSprite) && !(std::regex_match(frameName, glowPlayer))))
-			static_cast<MyCCSprite*>(sprite)->m_fields->isGlowSprite = true;
-        return sprite;
-    }
-    void setVisible(bool p0) {
-        if (m_fields->isGlowSprite)
-			CCSprite::setVisible(false);
-		else
-			CCSprite::setVisible(p0);
-    }
-};
-
-// disable gradient trigger (idea by ItsLever, optimization by PoweredByPie)
-// WINDOWS AND ANDROID
-#if defined(GEODE_IS_WINDOWS) || defined(GEODE_IS_ANDROID)
+// disable glowy objects (idea by TechStudent10)
 class $modify(MyPlayLayer, PlayLayer) {
-	static void onModify(auto & self)
-    {
-        self.setHookPriority("PlayLayer::addObject", 1000);
-    }
 	TodoReturn addObject(GameObject* p0) {
-        if (Mod::get()->getSettingValue<bool>("enabled") && Mod::get()->getSettingValue<bool>("disableGradientTriggers")) {
+        if (Mod::get()->getSettingValue<bool>("enabled")) {
             bool dontSkip = true;
-            if (p0->m_objectID == 2903) dontSkip = false; // gradient trigger ID
+            if (Mod::get()->getSettingValue<bool>("disableGradientTriggers") && p0->m_objectID == 2903) {
+                dontSkip = false;
+            }
+            if (Mod::get()->getSettingValue<bool>("hideGlowDeco") && std::find(iHateGradients.begin(), iHateGradients.end(), p0->m_objectID) != iHateGradients.end()) {
+                dontSkip = false;
+            }
+            if (Mod::get()->getSettingValue<bool>("hideGlowGameplayElements") && std::find(gameplayElements.begin(), gameplayElements.end(), p0->m_objectID) != gameplayElements.end()) {
+                p0->m_hasNoGlow = true;
+            }
+            if (Mod::get()->getSettingValue<bool>("hideGlowFromBlocks") && !(std::find(gameplayElements.begin(), gameplayElements.end(), p0->m_objectID) != gameplayElements.end())) {
+                p0->m_hasNoGlow = true;
+            }
             if (dontSkip) PlayLayer::addObject(p0);
-        } else PlayLayer::addObject(p0);
+        }
+        else PlayLayer::addObject(p0);
 	}
 };
-#endif
