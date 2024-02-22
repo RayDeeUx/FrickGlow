@@ -4,11 +4,12 @@
             "android": "2.205",
             "win": "2.204"
         },
-	"version": "v1.1.0",
+	"version": "v1.2.0",
 	"id": "raydeeux.fuckglow",
-	"name": "FuckGlow",
+	"name": "FrickGlow",
 	"developer": "RayDeeUx",
 	"description": "Hides all glow-related objects (including glow from blocks).",
+	"repository": "https://github.com/RayDeeUx/FrickGlow",
 	"settings": {
 		"enabled": {
 			"name": "Enabled",
