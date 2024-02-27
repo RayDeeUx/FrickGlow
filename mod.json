@@ -4,8 +4,8 @@
             "android": "2.205",
             "win": "2.204"
         },
-	"version": "v1.2.0",
-	"id": "raydeeux.fuckglow",
+	"version": "v1.3.0",
+	"id": "raydeeux.frickglow",
 	"name": "FrickGlow",
 	"developer": "RayDeeUx",
 	"description": "Hides all glow-related objects (including glow from blocks).",

@@ -9,21 +9,13 @@ std::list<int> gameplayElements = {10, 11, 12, 13, 35, 36, 45, 46, 47, 67, 84, 9
 
 // disable glowy objects (idea by TechStudent10)
 class $modify(MyPlayLayer, PlayLayer) {
-	TodoReturn addObject(GameObject* p0) {
+	void addObject(GameObject* p0) {
         if (Mod::get()->getSettingValue<bool>("enabled")) {
             bool dontSkip = true;
-            if (Mod::get()->getSettingValue<bool>("disableGradientTriggers") && p0->m_objectID == 2903) {
-                dontSkip = false;
-            }
-            if (Mod::get()->getSettingValue<bool>("hideGlowDeco") && std::find(iHateGradients.begin(), iHateGradients.end(), p0->m_objectID) != iHateGradients.end()) {
-                dontSkip = false;
-            }
-            if (Mod::get()->getSettingValue<bool>("hideGlowGameplayElements") && std::find(gameplayElements.begin(), gameplayElements.end(), p0->m_objectID) != gameplayElements.end()) {
-                p0->m_hasNoGlow = true;
-            }
-            if (Mod::get()->getSettingValue<bool>("hideGlowFromBlocks") && !(std::find(gameplayElements.begin(), gameplayElements.end(), p0->m_objectID) != gameplayElements.end())) {
-                p0->m_hasNoGlow = true;
-            }
+            if (Mod::get()->getSettingValue<bool>("disableGradientTriggers") && p0->m_objectID == 2903) dontSkip = false;
+            if (Mod::get()->getSettingValue<bool>("hideGlowDeco") && std::find(iHateGradients.begin(), iHateGradients.end(), p0->m_objectID) != iHateGradients.end()) dontSkip = false;
+            if (Mod::get()->getSettingValue<bool>("hideGlowGameplayElements") && std::find(gameplayElements.begin(), gameplayElements.end(), p0->m_objectID) != gameplayElements.end()) p0->m_hasNoGlow = true;
+            if (Mod::get()->getSettingValue<bool>("hideGlowFromBlocks") && !(std::find(gameplayElements.begin(), gameplayElements.end(), p0->m_objectID) != gameplayElements.end())) p0->m_hasNoGlow = true;
             if (dontSkip) PlayLayer::addObject(p0);
         }
         else PlayLayer::addObject(p0);
