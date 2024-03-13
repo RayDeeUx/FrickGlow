@@ -1,4 +1,6 @@
 # FrickGlow Changelog
+## v1.4.0
+- Change mod ID per the new Geode index's anti-profanity rules.
 ## v1.3.0
 - Refactor return type responsible for skipping objects, because alk is (rightfully) allergic to `TodoReturn` return types. Regardless of whether or not you understood the previous sentence, almost nothing changes for you, the enduser.
 - Fix a trailing comma at one of the lists.
