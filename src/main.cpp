@@ -7,9 +7,7 @@
 using namespace geode::prelude;
 using namespace geode::utils::string;
 
-const std::regex glowSprite(".*_\\d+_.*\\.png");
 const std::regex glowGameplay("(?:\\w+)?(?:[Bb](?:ump|oost)|[Rr]ing)_(?:\\d+_)?glow_001\\.png");
-const std::regex glowPlayer(".*(?:robot|spider|ship|player|ball|bird|ufo|dart|wave|swing).*");
 
 std::list<int> iHateGradients = {503, 504, 505, 1008, 1009, 1010, 1011, 1012, 1013, 1269, 1270, 1271, 1272, 1273, 1274, 1291, 1292, 1293, 1758, 1759, 1760, 1761, 1762, 1763, 1886, 1887, 1888};
 std::list<int> gameplayElements = {10, 11, 12, 13, 35, 36, 45, 46, 47, 67, 84, 99, 101, 111, 140, 141, 200, 201, 202, 203, 286, 287, 660, 745, 746, 747, 748, 1022, 1330, 1331, 1332, 1333, 1334, 1594, 1704, 1751, 1933, 2063, 2064, 2902, 2926, 3004, 3005, 3027 };
@@ -26,25 +24,22 @@ class $modify(MyGameObject, GameObject) {
     }
     static GameObject* createWithFrame(char const* frameName) {
         GameObject* gameObject = GameObject::createWithFrame(frameName);
+        if (typeinfo_cast<PlayerObject*>(gameObject) != nullptr) return gameObject;
         if (!(Mod::get()->getSettingValue<bool>("enabled"))) return gameObject;
 		if (Mod::get()->getSettingValue<int64_t>("hideGlowDecoNew") != 1) return gameObject;
         if (((strcmp(frameName, "emptyFrame.png") == 0) || (string::contains(frameName, "_gradient_"))))
             static_cast<MyGameObject*>(gameObject)->m_fields->isGradient = true;
-		// if (!(Mod::get()->getSettingValue<bool>("hideGlowDecoAdvanced"))) return gameObject;
-		// if (strcmp(frameName, "blockOutline_14_001.png") == 0 || strcmp(frameName, "blockOutline_15_001.png") == 0)
-        //     static_cast<MyGameObject*>(gameObject)->m_fields->isGradient = true;
         return gameObject;
     }
     void setVisible(bool p0) {
-        if (m_fields->isGradient)
-			GameObject::setVisible(false);
-		else
-			GameObject::setVisible(p0);
+        if (typeinfo_cast<PlayerObject*>(this) != nullptr) GameObject::setVisible(p0);
+        else if (m_fields->isGradient) GameObject::setVisible(false);
+		else GameObject::setVisible(p0);
     }
 };
 #endif
 
-// disable glowy objects (idea by TechStudent10)
+// disable glowy objects (idea by TechStudent10, original concept by ItzLever)
 class $modify(MyPlayLayer, PlayLayer) {
 	void addObject(GameObject* p0) {
         if (Mod::get()->getSettingValue<bool>("enabled")) {
