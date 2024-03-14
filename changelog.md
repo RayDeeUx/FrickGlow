@@ -1,4 +1,6 @@
 # FrickGlow Changelog
+## v1.3.2
+- Rename mod ID per the new Geode index's anti-profanity guidelines.
 ## v1.3.1
 - *Finally* manage to resolve the incredibly rare incompat with Capeling's Gamemode Swapper mod. If anyone was curious what it was, FrickGlow would sometimes mistakenly hide the player if a level started with a mini-sized player (regardless of Testmode status). Sorry for putting you through the update fatigue!
 ## v1.3.0
