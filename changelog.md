@@ -1,4 +1,6 @@
 # FrickGlow Changelog
+## v1.3.2
+- Rename mod ID per the new Geode index's anti-profanity guidelines.
 ## v1.3.1
 - *Finally* manage to resolve the incredibly rare incompat with Capeling's Gamemode Swapper mod.
 ## v1.3.0
