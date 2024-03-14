@@ -12,5 +12,4 @@ Made with much-appreciated help from:
 \- ItsLever (disabling Gradient trigger strategy)
 \- poweredbypie (Gradient trigger conditional statement code golf)
 
-
 This Geode mod is licensed under LGPLv2.

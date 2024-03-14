@@ -4,8 +4,8 @@
             "android": "2.205",
             "win": "2.204"
         },
-	"version": "v1.3.2",
-	"id": "raydeeux.frickglow",
+	"version": "v1.3.1",
+	"id": "raydeeux.fuckglow",
 	"name": "FrickGlow",
 	"developer": "RayDeeUx",
 	"description": "Hides all glow-related objects (including glow from blocks).",
@@ -19,7 +19,7 @@
 		},
 		"hideGlowDecoNew": {
 			"name": "Hide Glow Deco",
-			"description": "0: Disables this option.\n1 <cp>(WINDOWS ONLY)</c>: Hide 99% of glow decorations <cy>(the 1% of glow objects that can't be hidden using this method share frame names with other solid objects in the game).</c>.\n2: Hide 100% of glow decorations, <cr>but comes with the risk of crashing the game in some rare cases.</c>",
+			"description": "0: Disables this option.\n1 <cp>(WINDOWS ONLY)</c>: Hide 99% of glow decorations <cy>(the 1% of glow objects that can't be hidden using this method share frame names with other solid objects in the game)</c>.\n2: Hide 100% of glow decorations, <cr>but comes with the risk of crashing the game in some rare cases.</c>",
 			"type": "int",
 			"default": 1,
 			"min": 0,
