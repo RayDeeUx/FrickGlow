@@ -14,40 +14,44 @@ std::list<int> gameplayElements = {10, 11, 12, 13, 35, 36, 45, 46, 47, 67, 84, 9
 // WINDOWS ONLY
 #if defined(GEODE_IS_WINDOWS)
 class $modify(MyGameObject, GameObject) {
-    bool isGradient = false;
-    static void onModify(auto & self)
-    {
-        self.setHookPriority("GameObject::createWithFrame", 1000);
-        self.setHookPriority("GameObject::setVisible", 1000);
-    }
-    static GameObject* createWithFrame(char const* frameName) {
-        GameObject* gameObject = GameObject::createWithFrame(frameName);
-        if (typeinfo_cast<PlayerObject*>(gameObject) != nullptr) return gameObject;
-        if (!(Mod::get()->getSettingValue<bool>("enabled"))) return gameObject;
+	bool isGradient = false;
+	static void onModify(auto & self)
+	{
+		self.setHookPriority("GameObject::createWithFrame", 1000);
+		self.setHookPriority("GameObject::setVisible", 1000);
+	}
+	static GameObject* createWithFrame(char const* frameName) {
+		GameObject* gameObject = GameObject::createWithFrame(frameName);
+		if (!PlayLayer::get()) return gameObject;
+		if (typeinfo_cast<PlayerObject*>(gameObject) != nullptr) return gameObject;
+		if (typeinfo_cast<EffectGameObject*>(gameObject) && std::string(frameName).starts_with("secretCoin_")) {
+			return gameObject;
+		}
+		if (!(Mod::get()->getSettingValue<bool>("enabled"))) return gameObject;
 		if (Mod::get()->getSettingValue<int64_t>("hideGlowDecoNew") != 1) return gameObject;
-        if (((strcmp(frameName, "emptyFrame.png") == 0) || (string::contains(frameName, "_gradient_"))))
-            static_cast<MyGameObject*>(gameObject)->m_fields->isGradient = true;
-        return gameObject;
-    }
-    void setVisible(bool p0) {
-        if (typeinfo_cast<PlayerObject*>(this) != nullptr) GameObject::setVisible(p0);
-        else if (m_fields->isGradient) GameObject::setVisible(false);
+		if (((strcmp(frameName, "emptyFrame.png") == 0) || (string::contains(frameName, "_gradient_"))))
+			static_cast<MyGameObject*>(gameObject)->m_fields->isGradient = true;
+		return gameObject;
+	}
+	void setVisible(bool p0) {
+		if (typeinfo_cast<PlayerObject*>(this) != nullptr || typeinfo_cast<EffectGameObject*>(this) != nullptr) GameObject::setVisible(p0);
+		else if (m_fields->isGradient) GameObject::setVisible(false);
 		else GameObject::setVisible(p0);
-    }
+	}
 };
 #endif
 
 // disable glowy objects (idea by TechStudent10, original concept by ItzLever)
 class $modify(MyPlayLayer, PlayLayer) {
 	void addObject(GameObject* p0) {
-        if (Mod::get()->getSettingValue<bool>("enabled")) {
-            bool dontSkip = true;
-            if (Mod::get()->getSettingValue<bool>("disableGradientTriggers") && p0->m_objectID == 2903) dontSkip = false;
-            if (Mod::get()->getSettingValue<int64_t>("hideGlowDecoNew") == 2 && std::find(iHateGradients.begin(), iHateGradients.end(), p0->m_objectID) != iHateGradients.end()) dontSkip = false;
-            if (Mod::get()->getSettingValue<bool>("hideGlowGameplayElements") && std::find(gameplayElements.begin(), gameplayElements.end(), p0->m_objectID) != gameplayElements.end()) p0->m_hasNoGlow = true;
-            if (Mod::get()->getSettingValue<bool>("hideGlowFromBlocks") && !(std::find(gameplayElements.begin(), gameplayElements.end(), p0->m_objectID) != gameplayElements.end())) p0->m_hasNoGlow = true;
-            if (dontSkip) PlayLayer::addObject(p0);
-        }
-        else PlayLayer::addObject(p0);
+		if (Mod::get()->getSettingValue<bool>("enabled")) {
+			bool dontSkip = true;
+			if (Mod::get()->getSettingValue<bool>("disableGradientTriggers") && p0->m_objectID == 2903) dontSkip = false;
+			if (Mod::get()->getSettingValue<int64_t>("hideGlowDecoNew") == 2 && std::find(iHateGradients.begin(), iHateGradients.end(), p0->m_objectID) != iHateGradients.end()) dontSkip = false;
+			if (Mod::get()->getSettingValue<bool>("hideGlowGameplayElements") && std::find(gameplayElements.begin(), gameplayElements.end(), p0->m_objectID) != gameplayElements.end()) p0->m_hasNoGlow = true;
+			if (Mod::get()->getSettingValue<bool>("hideGlowFromBlocks") && !(std::find(gameplayElements.begin(), gameplayElements.end(), p0->m_objectID) != gameplayElements.end())) p0->m_hasNoGlow = true;
+			if (dontSkip) PlayLayer::addObject(p0);
+		}
+		else PlayLayer::addObject(p0);
 	}
 };
