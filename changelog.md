@@ -1,5 +1,6 @@
 # FrickGlow Changelog
 ## v1.3.3
+- Option 1 of "Hide Glow Deco" is no longer exclusive to Windows.
 - Futureproofing the mod against unexpected `m_fields` behavior between Geode versions. Also raised the minimum Geode version requirement.
 ## v1.3.2
 - Fix a conflict with Weebify's Coins in Pause Menu mod, and hopefully all other mods in the future.
