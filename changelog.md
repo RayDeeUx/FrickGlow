@@ -1,4 +1,6 @@
 # FrickGlow Changelog
+## v1.3.4
+- Rename the mod ID per the Geode index's new anti-profanity guidelines.
 ## v1.3.3
 - Option 1 of "Hide Glow Deco" is no longer exclusive to Windows.
 - Futureproofing the mod against unexpected `m_fields` behavior between Geode versions. Also raised the minimum Geode version requirement.
