@@ -5,8 +5,8 @@
 			"win": "2.204",
 			"mac": "2.000"
 		},
-	"version": "v1.3.3",
-	"id": "raydeeux.fuckglow",
+	"version": "v1.3.4",
+	"id": "raydeeux.frickglow",
 	"name": "FrickGlow",
 	"developer": "RayDeeUx",
 	"description": "Hides all glow-related objects (including glow from blocks).",
