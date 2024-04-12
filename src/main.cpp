@@ -7,14 +7,14 @@
 using namespace geode::prelude;
 using namespace geode::utils::string;
 
+bool isGradient = false;
+
 std::list<int> iHateGradients = {503, 504, 505, 1008, 1009, 1010, 1011, 1012, 1013, 1269, 1270, 1271, 1272, 1273, 1274, 1291, 1292, 1293, 1758, 1759, 1760, 1761, 1762, 1763, 1886, 1887, 1888};
 std::list<int> gameplayElements = {10, 11, 12, 13, 35, 36, 45, 46, 47, 67, 84, 99, 101, 111, 140, 141, 200, 201, 202, 203, 286, 287, 660, 745, 746, 747, 748, 1022, 1330, 1331, 1332, 1333, 1334, 1594, 1704, 1751, 1933, 2063, 2064, 2902, 2926, 3004, 3005, 3027 };
 
 // hide gradients via GameObject (hooking, static_cast, m_fields by dank_meme, matcool, Firee) (string utils suggested by cgytrus)
-// WINDOWS ONLY
-#if defined(GEODE_IS_WINDOWS)
+// #if defined(GEODE_IS_WINDOWS)
 class $modify(MyGameObject, GameObject) {
-	bool isGradient = false;
 	static void onModify(auto & self)
 	{
 		self.setHookPriority("GameObject::createWithFrame", 1000);
@@ -29,17 +29,20 @@ class $modify(MyGameObject, GameObject) {
 		}
 		if (!(Mod::get()->getSettingValue<bool>("enabled"))) return gameObject;
 		if (Mod::get()->getSettingValue<int64_t>("hideGlowDecoNew") != 1) return gameObject;
-		if (((strcmp(frameName, "emptyFrame.png") == 0) || (string::contains(frameName, "_gradient_"))))
-			static_cast<MyGameObject*>(gameObject)->m_fields->isGradient = true;
+		if (((strcmp(frameName, "emptyFrame.png") == 0) || (string::contains(frameName, "_gradient_")))) {
+			isGradient = true;
+		} else {
+			isGradient = false;
+		}
 		return gameObject;
 	}
 	void setVisible(bool p0) {
 		if (typeinfo_cast<PlayerObject*>(this) != nullptr || typeinfo_cast<EffectGameObject*>(this) != nullptr) GameObject::setVisible(p0);
-		else if (m_fields->isGradient) GameObject::setVisible(false);
+		else if (isGradient) GameObject::setVisible(false);
 		else GameObject::setVisible(p0);
 	}
 };
-#endif
+// #endif
 
 // disable glowy objects (idea by TechStudent10, original concept by ItzLever)
 class $modify(MyPlayLayer, PlayLayer) {

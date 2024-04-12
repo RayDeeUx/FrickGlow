@@ -1,11 +1,11 @@
 {
-	"geode": "2.0.0-beta.22",
+	"geode": "2.0.0-beta.23",
 	"gd": {
 			"android": "2.205",
 			"win": "2.204"
 		},
 	"version": "v1.3.3",
-	"id": "raydeeux.frickglow",
+	"id": "raydeeux.fuckglow",
 	"name": "FrickGlow",
 	"developer": "RayDeeUx",
 	"description": "Hides all glow-related objects (including glow from blocks).",
