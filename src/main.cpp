@@ -12,7 +12,9 @@ std::list<int> gameplayElements = {10, 11, 12, 13, 35, 36, 45, 46, 47, 67, 84, 9
 
 // hide gradients via GameObject (hooking, static_cast, m_fields by dank_meme, matcool, Firee) (string utils suggested by cgytrus)
 class $modify(MyGameObject, GameObject) {
-	bool isGradient = false;
+	struct Fields {
+		bool isGradient = false;
+	};
 	static void onModify(auto & self)
 	{
 		self.setHookPriority("GameObject::createWithFrame", 1000);
