@@ -1,5 +1,6 @@
 # FrickGlow Changelog
 ## v1.3.4
+- Port to 2.206.
 - Rename the mod ID per the Geode index's new anti-profanity guidelines.
 - Refactor some member fields.
 ## v1.3.3
