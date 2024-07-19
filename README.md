@@ -8,6 +8,6 @@ Made with much-appreciated help from:
 - ItsLever (disabling Gradient trigger strategy)
 - poweredbypie (Gradient trigger conditional statement code golf)
 
-Disclaimers:
-- This mod is no longer available for macOS.
-- This may affect overall game performance with loading levels.
+For more info about potential crashes from this mod, view this mod in-game instead of through GitHub.
+
+This [Geode mod](https://geode-sdk.org) is licensed under LGPLv2.
