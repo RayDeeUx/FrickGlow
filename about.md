@@ -11,4 +11,4 @@ Earlier versions of this mod were made with much-appreciated help from:
 \- ItsLever (disabling Gradient trigger strategy)
 \- poweredbypie (Gradient trigger conditional statement code golf)
 
-This [Geode mod](https://geode-sdk.org) is licensed under LGPLv2. To report bugs or get help with using my mods, press the Discord button at the lower left corner.
+This [Geode mod](https://geode-sdk.org) is licensed under LGPLv2. To report bugs or get help with using my mods, press the Discord button in the lower left corner.
