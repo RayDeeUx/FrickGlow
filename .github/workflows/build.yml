@@ -39,7 +39,7 @@ jobs:
           # export-pdb: true # comment this (and the line above!) out to Release mode
           # bindings: "RayDeeUx/bindings" # comment this out to swap to "geode-sdk/bindings"
           # bindings-ref: "frickglow" # comment this out to use default branch
-          # sdk: nightly # comment this out to use stable Geode SDK version
+          sdk: nightly use stable Geode SDK version
           combine: true
           target: ${{ matrix.config.target }}
 
