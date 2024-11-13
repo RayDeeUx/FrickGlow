@@ -1,4 +1,3 @@
-#include <Geode/Geode.hpp>
 #include <Geode/modify/GameObject.hpp>
 #include <Geode/modify/PlayLayer.hpp>
 #include <list>

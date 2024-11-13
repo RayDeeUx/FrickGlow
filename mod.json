@@ -1,11 +1,11 @@
 {
-	"geode": "3.4.0",
+	"geode": "4.0.0-alpha.1",
 	"gd": {
-		"android": "2.206",
-		"win": "2.206",
-		"mac": "2.206"
+		"android": "2.2074",
+		"win": "2.2074",
+		"mac": "2.2074"
 	},
-	"version": "v1.3.4",
+	"version": "v1.3.5",
 	"id": "raydeeux.frickglow",
 	"name": "FrickGlow",
 	"developer": "RayDeeUx",
