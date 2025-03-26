@@ -1,11 +1,11 @@
 {
-	"geode": "4.0.0-beta.1",
+	"geode": "4.2.0",
 	"gd": {
-		"android": "2.2074",
 		"win": "2.2074",
-		"mac": "2.2074"
+		"mac": "2.2074",
+		"android": "2.2074"
 	},
-	"version": "v1.3.5",
+	"version": "v1.4.0",
 	"id": "raydeeux.frickglow",
 	"name": "FrickGlow",
 	"developer": "RayDeeUx",
@@ -18,17 +18,10 @@
 			"type": "bool",
 			"default": true
 		},
-		"hideGlowDecoNew": {
+		"hideGlowDecoFinal": {
 			"name": "Hide Glow Deco",
-			"description": "0: Disables this option.\n1: Hide 99% of glow decorations <cy>(the 1% of glow objects that can't be hidden using this method share frame names with other solid objects in the game)</c>.\n2: Hide 100% of glow decorations, <cr>but comes with the risk of crashing the game in some rare cases.</c>",
-			"type": "int",
-			"default": 1,
-			"min": 0,
-			"max": 2,
-			"control": {
-				"slider-step": 1,
-				"arrow-step": 1
-			}
+			"type": "bool",
+			"default": true
 		},
 		"hideGlowFromBlocks": {
 			"name": "Hide Glow from Solids",
@@ -49,12 +42,22 @@
 			"default": false
 		}
 	},
-	"incompatibilities": [
-		{
-			"id": "raydeeux.fuckglow",
+	"incompatibilities": {
+		"raydeeux.fuckglow": {
 			"version": "*",
 			"importance": "superseded"
 		}
+	},
+	"dependencies": {
+		"ninxout.options_api": {
+			"version": "1.0.0",
+			"importance": "suggested"
+		}
+	},
+	"tags":	[
+		"cheat",
+		"offline",
+		"gameplay"
 	],
 	"issues": {
 		"url": "https://discord.com/channels/911701438269386882/1205523212444639292",
