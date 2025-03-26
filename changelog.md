@@ -1,4 +1,7 @@
 # FrickGlow Changelog
+## v1.4.0
+- Finally found a consistent solution to hiding all glow decoration without crashing the game.
+- Added More Options API support.
 ## v1.3.5
 - Port to 2.2074.
 ## v1.3.4

@@ -1,3 +1,4 @@
+#include <ninxout.options_api/include/API.hpp>
 #include <Geode/modify/GameObject.hpp>
 #include <Geode/modify/PlayLayer.hpp>
 
@@ -28,3 +29,24 @@ class $modify(MyPlayLayer, PlayLayer) {
 		PlayLayer::addObject(theObject);
 	}
 };
+
+#define ADD_TOGGLE(displayName, settingsID, detailedDesc)\
+	OptionsAPI::addPreLevelSetting<bool>(\
+		displayName,\
+		settingsID""_spr,\
+		[](GJGameLevel*) {\
+			const bool origValue = Mod::get()->getSettingValue<bool>(settingsID);\
+			Mod::get()->setSettingValue<bool>(settingsID, !origValue);\
+		},\
+		[](GJGameLevel*) {\
+			return Mod::get()->getSettingValue<bool>(settingsID);\
+		},\
+		"<cl>(From FrickGlow)</c>\n" detailedDesc\
+	);
+
+$on_mod(Loaded) {
+	ADD_TOGGLE("Hide Glow/Gradient Decoration", "hideGlowDecoFinal", "Hides all glow/gradient decoration in a level.")
+	ADD_TOGGLE("Hide Glow from Solids", "hideGlowFromBlocks", "Hide glow from solid objects.")
+	ADD_TOGGLE("Hide Glow from Gameplay Elements", "hideGlowGameplayElements", "Hide glow from gameplay elements.\nMore specifically: jump orbs, speed portals, and jump pads.")
+	ADD_TOGGLE("Hide Glow from Gradient Triggers", "disableGradientTriggers", "Hide glow from gradient triggers.\n<c_>(Not recommended unless if you know what you're doing.)</c>")
+}

@@ -19,7 +19,7 @@
 			"default": true
 		},
 		"hideGlowDecoFinal": {
-			"name": "Hide Glow Deco",
+			"name": "Hide Glow/Gradient Decoration",
 			"type": "bool",
 			"default": true
 		},
@@ -37,7 +37,7 @@
 		},
 		"disableGradientTriggers": {
 			"name": "Hide Glow from Gradient Triggers",
-			"description": "Hide glow from gradient triggers.\n\nNot recommended unless if you know what you're doing.",
+			"description": "Hide glow from gradient triggers.\n<c_>(Not recommended unless if you know what you're doing.)</c>",
 			"type": "bool",
 			"default": false
 		}
