@@ -18,6 +18,12 @@
 			"type": "bool",
 			"default": true
 		},
+		"optionsAPI": {
+			"name": "Settings as Options",
+			"description": "Adds the checkmark (boolean) settings of this mod into the \"More Options\" menu.\n<cy>Requires ninXout's Options API mod.</c>\n<c_>Changing ths setting requires a full game restart.</c>",
+			"type": "bool",
+			"default": true
+		},
 		"hideGlowDecoFinal": {
 			"name": "Hide Glow/Gradient Decoration",
 			"type": "bool",

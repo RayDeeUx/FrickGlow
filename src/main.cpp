@@ -45,6 +45,7 @@ class $modify(MyPlayLayer, PlayLayer) {
 	);
 
 $on_mod(Loaded) {
+	if (!Mod::get()->getSettingValue<bool>("optionsAPI")) return;
 	ADD_TOGGLE("Hide Glow/Gradient Decoration", "hideGlowDecoFinal", "Hides all glow/gradient decoration in a level.")
 	ADD_TOGGLE("Hide Glow from Solids", "hideGlowFromBlocks", "Hide glow from solid objects.")
 	ADD_TOGGLE("Hide Glow from Gameplay Elements", "hideGlowGameplayElements", "Hide glow from gameplay elements.\nMore specifically: jump orbs, speed portals, and jump pads.")
