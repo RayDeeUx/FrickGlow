@@ -50,7 +50,7 @@
 	},
 	"incompatibilities": {
 		"raydeeux.fuckglow": {
-			"version": "*",
+			"version": ">=1.0.0",
 			"importance": "superseded"
 		}
 	},
