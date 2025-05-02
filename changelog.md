@@ -1,4 +1,6 @@
 # FrickGlow Changelog
+## v1.4.1
+- Experimental iOS support.
 ## v1.4.0
 - Finally found a consistent solution to hiding all glow decoration without crashing the game.
 - Added Options API support.
