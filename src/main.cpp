@@ -24,8 +24,8 @@ class $modify(MyPlayLayer, PlayLayer) {
 	void addObject(GameObject* theObject) {
 		if (!Mod::get()->getSettingValue<bool>("enabled")) return PlayLayer::addObject(theObject);
 		if (Mod::get()->getSettingValue<bool>("disableGradientTriggers") && theObject->m_objectID == 2903) return;
-		const bool inGameplayElements = std::binary_search(gameplayElements.begin(), gameplayElements.end(), theObject->m_objectID) != gameplayElements.end();
-		const bool isInvisibleObject = std::binary_search(invisibleObjects.begin(), invisibleObjects.end(), theObject->m_objectID) != invisibleObjects.end();
+		const bool inGameplayElements = std::binary_search(gameplayElements.begin(), gameplayElements.end(), theObject->m_objectID);
+		const bool isInvisibleObject = std::binary_search(invisibleObjects.begin(), invisibleObjects.end(), theObject->m_objectID);
 		if (Mod::get()->getSettingValue<bool>("hideGlowGameplayElements") && inGameplayElements) theObject->m_hasNoGlow = true;
 		if (Mod::get()->getSettingValue<bool>("hideGlowFromBlocks") && !inGameplayElements && (theObject->m_objectType == GameObjectType::Solid || theObject->m_objectType == GameObjectType::Hazard || theObject->m_objectType == GameObjectType::Breakable || theObject->m_objectType == GameObjectType::Slope)) {
 			if (!Mod::get()->getSettingValue<bool>("excludeInvisibleFromHideGlow") || !isInvisibleObject) theObject->m_hasNoGlow = true;
