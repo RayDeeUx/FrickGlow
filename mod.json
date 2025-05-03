@@ -6,7 +6,7 @@
 		"android": "2.2074",
 		"ios": "2.2074"
 	},
-	"version": "v1.4.1",
+	"version": "v1.4.2",
 	"id": "raydeeux.frickglow",
 	"name": "FrickGlow",
 	"developer": "RayDeeUx",
@@ -33,6 +33,12 @@
 		"hideGlowFromBlocks": {
 			"name": "Hide Glow from Solids",
 			"description": "Hide glow from solid objects.",
+			"type": "bool",
+			"default": true
+		},
+		"excludeInvisibleFromHideGlow": {
+			"name": "Exclude Invisible Objects from Hidden Glow",
+			"description": "Excludes invisible objects when <cl>Hide Glow from Solids</c> is enabled.",
 			"type": "bool",
 			"default": true
 		},

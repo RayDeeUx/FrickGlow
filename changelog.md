@@ -1,4 +1,7 @@
 # FrickGlow Changelog
+## v1.4.2
+- Make sure that `Hide Glow from Solids` actually hidea glow from solid objects only.
+- Added `Exclude Invisible Objects from Hidden Glow` for when `Hide Glow from Solids` is enabled.
 ## v1.4.1
 - Experimental iOS support.
 ## v1.4.0
