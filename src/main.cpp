@@ -27,7 +27,7 @@ class $modify(MyPlayLayer, PlayLayer) {
 		const bool inGameplayElements = std::binary_search(gameplayElements.begin(), gameplayElements.end(), theObject->m_objectID);
 		const bool isInvisibleObject = std::binary_search(invisibleObjects.begin(), invisibleObjects.end(), theObject->m_objectID);
 		if (Mod::get()->getSettingValue<bool>("hideGlowGameplayElements") && inGameplayElements) theObject->m_hasNoGlow = true;
-		if (Mod::get()->getSettingValue<bool>("hideGlowFromBlocks") && !inGameplayElements && (theObject->m_objectType == GameObjectType::Solid || theObject->m_objectType == GameObjectType::Hazard || theObject->m_objectType == GameObjectType::Breakable || theObject->m_objectType == GameObjectType::Slope)) {
+		if (Mod::get()->getSettingValue<bool>("hideGlowFromBlocks") && !inGameplayElements && (theObject->m_objectType == GameObjectType::Solid || theObject->m_objectType == GameObjectType::Hazard || theObject->m_objectType == GameObjectType::AnimatedHazard || theObject->m_objectType == GameObjectType::Breakable || theObject->m_objectType == GameObjectType::Slope)) {
 			if (!Mod::get()->getSettingValue<bool>("excludeInvisibleFromHideGlow") || !isInvisibleObject) theObject->m_hasNoGlow = true;
 		}
 		PlayLayer::addObject(theObject);
