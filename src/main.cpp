@@ -52,6 +52,7 @@ $on_mod(Loaded) {
 	if (!Mod::get()->getSettingValue<bool>("optionsAPI")) return;
 	ADD_TOGGLE("Hide Glow/Gradient Decoration", "hideGlowDecoFinal", "Hides all glow/gradient decoration in a level.")
 	ADD_TOGGLE("Hide Glow from Solids", "hideGlowFromBlocks", "Hide glow from solid objects.")
+	ADD_TOGGLE("Exclude Invisible Objects from Hidden Glow", "excludeInvisibleFromHideGlow", "Excludes invisible objects when <cl>Hide Glow from Solids</c> is enabled.")
 	ADD_TOGGLE("Hide Glow from Gameplay Elements", "hideGlowGameplayElements", "Hide glow from gameplay elements.\nMore specifically: jump orbs, speed portals, and jump pads.")
 	ADD_TOGGLE("Hide Glow from Gradient Triggers", "disableGradientTriggers", "Hide glow from gradient triggers.\n<c_>(Not recommended unless if you know what you're doing.)</c>")
 }
