@@ -62,7 +62,10 @@
 		}
 	},
 	"dependencies": {
-		"ninxout.options_api": "1.0.0"
+		"ninxout.options_api": {
+			"version": "1.0.0",
+			"importance": "suggested"
+		}
 	},
 	"README": "i'm not a huge fan of making Options API a required depdendency, but there's been this stupid bug where marking it as anything lower than a required depdendency stops the toggles from being added to the game. sorry about that--to compensate, you can toggle that option off in the mod settings.",
 	"tags": [
