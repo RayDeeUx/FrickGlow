@@ -1,4 +1,10 @@
 # FrickGlow Changelog
+## v1.4.4
+- Make sure that `Hide Glow from Solids` actually hides glow from solid objects only.
+  - ...except it's done properly this time, so solid objects marked as `NoTouch` also have their glow removed.
+  - This actually restores the first change mentioned under v1.4.2, and remains that way because someone was (in)sane enough to ~~give me~~ compose a list of the object ID(s) of every solid in the game. Thanks Alphalaneous!
+- Added `Exclude NoTouch Solid Objects` for those who prefer old behavior.
+- Minor refactors here and there.
 ## v1.4.3
 - Fix the bug where solids marked as NoTouch did not have their glow removed.
   - This actually undoes the first change mentioned under v1.4.2, and remains that way until someone is (in)sane enough to give me a list of the object ID of every solid in the game.

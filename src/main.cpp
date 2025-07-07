@@ -4,17 +4,19 @@
 
 using namespace geode::prelude;
 
-static const std::set<int> iHateGradients = {503, 504, 505, 1008, 1009, 1010, 1011, 1012, 1013, 1269, 1270, 1271, 1272, 1273, 1274, 1291, 1292, 1293, 1758, 1759, 1760, 1761, 1762, 1763, 1886, 1887, 1888};
-static const std::set<int> gameplayElements = {10, 11, 12, 13, 35, 36, 45, 46, 47, 67, 84, 99, 101, 111, 140, 141, 200, 201, 202, 203, 286, 287, 660, 745, 746, 747, 748, 1022, 1330, 1331, 1332, 1333, 1334, 1594, 1704, 1751, 1933, 2063, 2064, 2902, 2926, 3004, 3005, 3027};
-static const std::set<int> invisibleObjects = {144, 145, 146, 147, 204, 205, 206, 459, 673, 674, 740, 741, 742, 1340, 1341, 1342, 1343, 1344, 1345};
+static const std::set iHateGradients = {503, 504, 505, 1008, 1009, 1010, 1011, 1012, 1013, 1269, 1270, 1271, 1272, 1273, 1274, 1291, 1292, 1293, 1758, 1759, 1760, 1761, 1762, 1763, 1886, 1887, 1888};
+static const std::set gameplayElements = {10, 11, 12, 13, 35, 36, 45, 46, 47, 67, 84, 99, 101, 111, 140, 141, 200, 201, 202, 203, 286, 287, 660, 745, 746, 747, 748, 1022, 1330, 1331, 1332, 1333, 1334, 1594, 1704, 1751, 1933, 2063, 2064, 2902, 2926, 3004, 3005, 3027};
+static const std::set invisibleObjects = {144, 145, 146, 147, 204, 205, 206, 459, 673, 674, 740, 741, 742, 1340, 1341, 1342, 1343, 1344, 1345};
+// numbers collected by alphalaneous from Object Summary mod. i'm sure they won't mind if i yoink this
+static const std::set solidObjects = { 1, 2, 3, 4, 6, 7, 40, 62, 63, 64, 65, 66, 68, 69, 70, 71, 72, 74, 75, 76, 77, 78, 81, 82, 83, 90, 91, 92, 93, 94, 95, 96, 116, 117, 118, 119, 121, 122, 143, 146, 147, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 192, 194, 195, 196, 197, 204, 206, 207, 208, 209, 210, 212, 213, 215, 219, 220, 247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 257, 258, 260, 261, 263, 264, 265, 267, 268, 269, 270, 271, 272, 274, 275, 289, 291, 294, 295, 305, 307, 321, 323, 326, 327, 331, 333, 337, 339, 343, 345, 349, 351, 353, 355, 369, 370, 371, 372, 467, 468, 469, 470, 471, 475, 483, 484, 492, 493, 651, 652, 661, 662, 663, 664, 665, 666, 673, 674, 711, 712, 726, 727, 728, 729, 886, 887, 1154, 1155, 1156, 1157, 1202, 1203, 1204, 1208, 1209, 1210, 1220, 1221, 1222, 1226, 1227, 1260, 1262, 1264, 1338, 1339, 1340, 1341, 1342, 1343, 1344, 1345, 1743, 1744, 1745, 1746, 1747, 1748, 1749, 1750, 1903, 1904, 1905, 1906, 1907, 1910, 1911 };
 
 class $modify(MyGameObject, GameObject) {
 	static void onModify(auto & self) {
 		(void) self.setHookPriority("GameObject::setVisible", -3999);
 	}
 	void setVisible(bool isVisible) {
-		if (!PlayLayer::get() || !Mod::get()->getSettingValue<bool>("hideGlowDecoFinal")) return GameObject::setVisible(isVisible);
-		if (std::binary_search(iHateGradients.begin(), iHateGradients.end(), this->m_objectID)) return GameObject::setVisible(false);
+		if (!PlayLayer::get() || !Mod::get()->getSettingValue<bool>("enabled") || !Mod::get()->getSettingValue<bool>("hideGlowDecoFinal")) return GameObject::setVisible(isVisible);
+		if (const bool isGradientObject = std::ranges::binary_search(iHateGradients.begin(), iHateGradients.end(), this->m_objectID)) return GameObject::setVisible(false);
 		GameObject::setVisible(isVisible);
 	}
 };
@@ -23,13 +25,20 @@ class $modify(MyGameObject, GameObject) {
 class $modify(MyPlayLayer, PlayLayer) {
 	void addObject(GameObject* theObject) {
 		if (!Mod::get()->getSettingValue<bool>("enabled")) return PlayLayer::addObject(theObject);
-		if (Mod::get()->getSettingValue<bool>("disableGradientTriggers") && theObject->m_objectID == 2903) return;
-		const bool inGameplayElements = std::binary_search(gameplayElements.begin(), gameplayElements.end(), theObject->m_objectID);
-		const bool isInvisibleObject = std::binary_search(invisibleObjects.begin(), invisibleObjects.end(), theObject->m_objectID);
-		const bool isGradientObject = std::binary_search(iHateGradients.begin(), iHateGradients.end(), theObject->m_objectID);
+		const int theID = theObject->m_objectID;
+		if (Mod::get()->getSettingValue<bool>("disableGradientTriggers") && theID == 2903) return;
+		const bool inGameplayElements = std::ranges::binary_search(gameplayElements.begin(), gameplayElements.end(), theID);
+		const bool isInvisibleObject = std::ranges::binary_search(invisibleObjects.begin(), invisibleObjects.end(), theID);
+		const bool isSolidObject = std::ranges::binary_search(solidObjects.begin(), solidObjects.end(), theID);
 		if (Mod::get()->getSettingValue<bool>("hideGlowGameplayElements") && inGameplayElements) theObject->m_hasNoGlow = true;
-		if (Mod::get()->getSettingValue<bool>("hideGlowFromBlocks") && !inGameplayElements && !isGradientObject) {
-			if (!Mod::get()->getSettingValue<bool>("excludeInvisibleFromHideGlow") || !isInvisibleObject) theObject->m_hasNoGlow = true;
+		if (Mod::get()->getSettingValue<bool>("hideGlowFromBlocks") && isSolidObject) {
+			if (theObject->m_objectType == GameObjectType::Decoration) {
+				if (!Mod::get()->getSettingValue<bool>("excludeNoTouch")) theObject->m_hasNoGlow = true;
+			} else if (isInvisibleObject) {
+				if (!Mod::get()->getSettingValue<bool>("excludeInvisibleFromHideGlow")) theObject->m_hasNoGlow = true;
+			} else {
+				theObject->m_hasNoGlow = true;
+			}
 		}
 		PlayLayer::addObject(theObject);
 	}
@@ -53,6 +62,7 @@ $on_mod(Loaded) {
 	if (!Mod::get()->getSettingValue<bool>("optionsAPI")) return;
 	ADD_TOGGLE("Hide Glow/Gradient Decoration", "hideGlowDecoFinal", "Hides all glow/gradient decoration in a level.")
 	ADD_TOGGLE("Hide Glow from Solids", "hideGlowFromBlocks", "Hide glow from solid objects.")
+	ADD_TOGGLE("Exclude NoTouch Solid Objects", "excludeNoTouch", "Exclude solid objects marked as NoTouch when <cl>Hide Glow from Solids</c> is enabled.")
 	ADD_TOGGLE("Exclude Invisible Objects from Hidden Glow", "excludeInvisibleFromHideGlow", "Excludes invisible objects when <cl>Hide Glow from Solids</c> is enabled.")
 	ADD_TOGGLE("Hide Glow from Gameplay Elements", "hideGlowGameplayElements", "Hide glow from gameplay elements.\nMore specifically: jump orbs, speed portals, and jump pads.")
 	ADD_TOGGLE("Hide Glow from Gradient Triggers", "disableGradientTriggers", "Hide glow from gradient triggers.\n<c_>(Not recommended unless if you know what you're doing.)</c>")

@@ -6,7 +6,7 @@
 		"ios": "2.2074",
 		"android": "2.2074"
 	},
-	"version": "v1.4.3",
+	"version": "v1.4.4",
 	"id": "raydeeux.frickglow",
 	"name": "FrickGlow",
 	"developer": "RayDeeUx",
@@ -35,6 +35,12 @@
 			"description": "Hide glow from solid objects.",
 			"type": "bool",
 			"default": true
+		},
+		"excludeNoTouch": {
+			"name": "Exclude NoTouch Solid Objects",
+			"description": "Exclude solid objects marked as NoTouch when <cl>Hide Glow from Solids</c> is enabled.",
+			"type": "bool",
+			"default": false
 		},
 		"excludeInvisibleFromHideGlow": {
 			"name": "Exclude Invisible Objects from Hidden Glow",
