@@ -1,4 +1,6 @@
 # FrickGlow Changelog
+## v1.4.5
+- Forgot about spikes. Kicking myself in the shins right now.
 ## v1.4.4
 - Make sure that `Hide Glow from Solids` actually hides glow from solid objects only.
   - ...except it's done properly this time, so solid objects marked as `NoTouch` also have their glow removed.
