@@ -1,4 +1,8 @@
 # FrickGlow Changelog
+## v1.4.6
+- Added `Hide Glow/Gradient Particles` and `Hide Glow/Gradient Particles (Part Two)`
+  - `Hide Glow/Gradient Particles` hides the following object IDs: 3825, 3828, 3958, 3959, and 3960.
+  - `Hide Glow/Gradient Particles (Part Two)` hides the following object IDs: 3827, 3832, 3961, 3963, 3969, and 3973.
 ## v1.4.5
 - Forgot about spikes. Kicking myself in the shins right now.
 ## v1.4.4

@@ -6,7 +6,7 @@
 		"ios": "2.2074",
 		"android": "2.2074"
 	},
-	"version": "v1.4.5",
+	"version": "v1.4.6",
 	"id": "raydeeux.frickglow",
 	"name": "FrickGlow",
 	"developer": "RayDeeUx",
@@ -29,6 +29,18 @@
 			"name": "Hide Glow/Gradient Decoration",
 			"type": "bool",
 			"default": true
+		},
+		"hideGlowParticles": {
+			"name": "Hide Glow/Gradient Particles",
+			"description": "Hides the following object IDs: 3825, 3828, 3958, 3959, and 3960.",
+			"type": "bool",
+			"default": false
+		},
+		"hideGlowParticlesExtra": {
+			"name": "Hide Glow/Gradient Particles (Part Two)",
+			"description": "Hides the following object IDs: 3827, 3832, 3961, 3963, 3969, and 3973.",
+			"type": "bool",
+			"default": false
 		},
 		"hideGlowFromBlocks": {
 			"name": "Hide Glow from Solids",
