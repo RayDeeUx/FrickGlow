@@ -1,12 +1,12 @@
 {
-	"geode": "4.4.0",
+	"geode": "5.0.0-beta.3",
 	"gd": {
-		"win": "2.2074",
-		"mac": "2.2074",
-		"ios": "2.2074",
-		"android": "2.2074"
+		"win": "2.2081",
+		"mac": "2.2081",
+		"ios": "2.2081",
+		"android": "2.2081"
 	},
-	"version": "v1.4.6",
+	"version": "v1.4.7",
 	"id": "raydeeux.frickglow",
 	"name": "FrickGlow",
 	"developer": "RayDeeUx",
@@ -74,15 +74,12 @@
 		}
 	},
 	"incompatibilities": {
-		"raydeeux.fuckglow": {
-			"version": ">=1.0.0",
-			"importance": "superseded"
-		}
+		"raydeeux.fuckglow": ">=1.0.0"
 	},
 	"dependencies": {
 		"ninxout.options_api": {
-			"version": "1.0.1",
-			"importance": "suggested"
+			"version": ">=1.0.2",
+			"required": false
 		}
 	},
 	"README": "i'm not a huge fan of making Options API a required depdendency, but there's been this stupid bug where marking it as anything lower than a required depdendency stops the toggles from being added to the game. sorry about that--to compensate, you can toggle that option off in the mod settings.",
