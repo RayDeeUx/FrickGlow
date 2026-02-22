@@ -1,12 +1,12 @@
 {
-	"geode": "5.0.0-beta.3",
+	"geode": "5.0.0-beta.4",
 	"gd": {
 		"win": "2.2081",
 		"mac": "2.2081",
 		"ios": "2.2081",
 		"android": "2.2081"
 	},
-	"version": "v1.4.7",
+	"version": "v1.4.8",
 	"id": "raydeeux.frickglow",
 	"name": "FrickGlow",
 	"developer": "RayDeeUx",
@@ -78,7 +78,7 @@
 	},
 	"dependencies": {
 		"ninxout.options_api": {
-			"version": ">=1.0.2",
+			"version": ">=1.0.3-beta.1",
 			"required": false
 		}
 	},

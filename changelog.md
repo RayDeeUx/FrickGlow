@@ -1,4 +1,6 @@
 # FrickGlow Changelog
+## v1.4.8
+- Recompile against latest Geode v5.0.0-beta.4.
 ## v1.4.7
 - Port to GD 2.2081.
 ## v1.4.6
